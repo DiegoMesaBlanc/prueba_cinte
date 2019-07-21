@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="col-md-6 mx-auto mt-5">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="text-center">REGISTRO</h1>
+  
+          <form #registryForm="ngForm" (ngSubmit)="registryUser()">
+            <div class="form-group">
+              <label for="email">Email <span style="color: red" [hidden]="!email.errors?.required">*</span></label>
+              <input [(ngModel)]="user.email" type="email" class="form-control" #email="ngModel" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
+            </div>
+            <p>
+              <span [hidden]="email.pristine" style="color: red">
+                <span [hidden]="!email.errors?.required">Campo obligatorio</span>
+                <span [hidden]="!email.errors?.pattern">Formato incorrecto de email</span>
+              </span>
+            </p>
+  
+            <div class="form-group">
+              <label for="password">Contraseña <span style="color: red" [hidden]="!pass.errors?.required">*</span></label>
+              <input [(ngModel)]="user.password" type="password" #pass="ngModel" name="password" class="form-control" id="password" required>
+            </div>
+            <p>
+              <span [hidden]="pass.pristine" style="color: red">
+                <span [hidden]="!pass.errors?.required">Campo obligatorio</span>
+              </span>
+            </p>
+
+            <input type="submit" [disabled]="!registryForm.form.valid" value="ENVIAR" class="btn btn-primary btn-block btn-lg mt-5">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

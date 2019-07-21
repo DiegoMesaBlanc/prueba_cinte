@@ -1,5 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireModule } from '@angular/fire';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +16,14 @@ import { EditItemComponent } from './components/edit-item/edit-item.component';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { DeleteItemComponent } from './components/delete-item/delete-item.component';
 
+import { AuthService } from './services/auth.service';
+
+import { environment } from '../environments/environment';
+import { RegistryComponent } from './components/registry/registry.component';
+
+// import { ApiInterceptor } from './common/interceptor/httpinterceptor';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,13 +34,22 @@ import { DeleteItemComponent } from './components/delete-item/delete-item.compon
     CreateItemComponent,
     EditItemComponent,
     NotFoundPageComponent,
-    DeleteItemComponent
+    DeleteItemComponent,
+    RegistryComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    // { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

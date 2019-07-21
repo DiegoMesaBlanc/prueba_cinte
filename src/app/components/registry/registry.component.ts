@@ -6,27 +6,29 @@ import { AuthService } from '../../services/auth.service';
 
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-registry',
+  templateUrl: './registry.component.html',
+  styleUrls: ['./registry.component.css']
 })
-export class LoginComponent implements OnInit {
+export class RegistryComponent implements OnInit {
 
   user: User = new User();
 
   constructor(
-    private loginSrv: AuthService,
+    private regSrv: AuthService,
     private router: Router
   ) { }
 
   ngOnInit() {
   }
 
-  loginUser() {
+  registryUser() {
     console.log(this.user);
-    return this.loginSrv.logIn(this.user.email, this.user.password)
+    return this.regSrv.registry(this.user.email, this.user.password)
       .then(res => {
-        this.router.navigate(['/items']);
+        console.log('BIEN !!!!');
+        console.log(res);
+        this.router.navigate(['/login']);
       })
       .catch(err => {
         console.log(err);

@@ -7,11 +7,13 @@ import { CreateItemComponent } from './components/create-item/create-item.compon
 import { EditItemComponent } from './components/edit-item/edit-item.component';
 import { DeleteItemComponent } from './components/delete-item/delete-item.component';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
+import { RegistryComponent } from './components/registry/registry.component';
 
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'registro', component: RegistryComponent },
   { path: 'items', component: ViewListComponent },
   { path: 'crear-item', component: CreateItemComponent },
   { path: 'editar-item', component: EditItemComponent },

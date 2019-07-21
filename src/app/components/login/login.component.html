@@ -4,19 +4,30 @@
       <div class="card-body">
         <h1 class="text-center">LOGIN</h1>
 
-        <form>
+        <form #loginForm="ngForm" (ngSubmit)="loginUser()">
           <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" class="form-control">
+            <label for="email">Email <span style="color: red" [hidden]="!email.errors?.required">*</span></label>
+            <input [(ngModel)]="user.email" type="email" class="form-control" #email="ngModel" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
           </div>
+          <p>
+            <span [hidden]="email.pristine" style="color: red">
+              <span [hidden]="!email.errors?.required">Campo obligatorio</span>
+              <span [hidden]="!email.errors?.pattern">Formato incorrecto de email</span>
+            </span>
+          </p>
 
           <div class="form-group">
-            <label for="password">Contraseña</label>
-            <input type="password" name="password" id="password" class="form-control">
+            <label for="password">Contraseña <span style="color: red" [hidden]="!pass.errors?.required">*</span></label>
+            <input [(ngModel)]="user.password" type="password" #pass="ngModel" name="password" class="form-control" id="password" required>
           </div>
+          <p>
+            <span [hidden]="pass.pristine" style="color: red">
+              <span [hidden]="!pass.errors?.required">Campo obligatorio</span>
+            </span>
+          </p>
+
+          <input type="submit" [disabled]="!loginForm.form.valid" value="ENVIAR" class="btn btn-primary btn-block btn-lg mt-5">
         </form>
-
-        <input type="text" value="ENVIAR" class="btn btn-primary btn-block btn-lg">
       </div>
     </div>
   </div>
