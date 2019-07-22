@@ -1,10 +1,19 @@
 <div class="row mt-5">
   <div class="col-md-12 mx-auto text-center">
     <div class="card border-primary mb-3">
-      <div class="card-header">Header</div>
+      <div class="card-header"><h4>Lista de items</h4></div>
       <div class="card-body">
-        <h4 class="card-title">Primary card title</h4>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <form class="form-inline">
+          <input [(ngModel)]="filterItem.title" type="text" #pass="ngModel" name="title" class="form-control mr-sm-2" id="title" placeholder="Search">
+          <button (click)="filter()" class="btn btn-secondary" type="submit">Search</button>
+        </form>
+
+        <ul class="list-group mt-4">
+          <li *ngFor="let item of items" class="list-group-item d-flex justify-start align-items-center">
+            <span class="badge badge-primary badge-pill">{{ item.id }}</span>&nbsp;&nbsp;&nbsp;
+            {{ item.title }}
+          </li>
+        </ul>
       </div>
     </div>
   </div>

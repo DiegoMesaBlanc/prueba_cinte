@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 import { User } from '../../common/models/User';
 import { AuthService } from '../../services/auth.service';
@@ -16,7 +17,8 @@ export class RegistryComponent implements OnInit {
 
   constructor(
     private regSrv: AuthService,
-    private router: Router
+    private router: Router,
+    private flashMess: FlashMessagesService
   ) { }
 
   ngOnInit() {
@@ -26,11 +28,11 @@ export class RegistryComponent implements OnInit {
     console.log(this.user);
     return this.regSrv.registry(this.user.email, this.user.password)
       .then(res => {
-        console.log('BIEN !!!!');
-        console.log(res);
-        this.router.navigate(['/login']);
+        this.flashMess.show('Usuario creado correctamente', {cssClass: 'alert-info', timeout: 4000});
+        this.router.navigate(['/items']);
       })
       .catch(err => {
+        this.flashMess.show(err.message, {cssClass: 'alert-danger', timeout: 4000});
         console.log(err);
       });
   }

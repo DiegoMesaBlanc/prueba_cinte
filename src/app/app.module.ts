@@ -4,6 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireModule } from '@angular/fire';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { FlashMessagesModule } from 'angular2-flash-messages';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +24,7 @@ import { environment } from '../environments/environment';
 import { RegistryComponent } from './components/registry/registry.component';
 
 // import { ApiInterceptor } from './common/interceptor/httpinterceptor';
+import { AuthGuard } from './guards/auth.guard';
 
 
 @NgModule({
@@ -44,11 +47,14 @@ import { RegistryComponent } from './components/registry/registry.component';
     ReactiveFormsModule,
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    HttpClientModule
+    HttpClientModule,
+    FlashMessagesModule
   ],
   providers: [
     // { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
-    AuthService
+    AuthService,
+    AuthGuard,
+    FlashMessagesService
   ],
   bootstrap: [AppComponent]
 })
